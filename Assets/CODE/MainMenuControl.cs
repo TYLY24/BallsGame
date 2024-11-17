@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuControl : MonoBehaviour
@@ -14,6 +15,8 @@ public class MainMenuControl : MonoBehaviour
     [SerializeField] Toggle toggleKeepShape;
     public bool KeepShape;
     [SerializeField] Mask rawImageMask;
+    [SerializeField] SavenLoad savenLoad;
+    [SerializeField] BallControl ballControl;
     
     void Awake()
     {
@@ -32,10 +35,7 @@ public class MainMenuControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void QUIT()
     {
@@ -64,6 +64,7 @@ public class MainMenuControl : MonoBehaviour
            PlayerPrefs.SetInt("KeepShape",0);
         }
         KeepShape=A;
+         ballControl.Test();
     }
     void loadToggler()
     {
@@ -78,7 +79,9 @@ public class MainMenuControl : MonoBehaviour
     }
     public void CLear()
     {
-
+        savenLoad.ClearData();
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("SampleScene*");
     }
 
 

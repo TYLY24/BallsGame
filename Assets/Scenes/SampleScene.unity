@@ -1064,7 +1064,7 @@ Transform:
   m_GameObject: {fileID: 419153062}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9695451, y: -8.25788, z: -0.030076593}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2822,7 +2822,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1147263572}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1645891359}
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
+        m_MethodName: CLear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1147263572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3991,6 +4003,8 @@ MonoBehaviour:
   toggleKeepShape: {fileID: 1129493680}
   KeepShape: 0
   rawImageMask: {fileID: 1410962395}
+  savenLoad: {fileID: 816286851}
+  ballControl: {fileID: 419153063}
 --- !u!1 &1713298551
 GameObject:
   m_ObjectHideFlags: 0

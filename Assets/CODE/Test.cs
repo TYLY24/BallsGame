@@ -15,6 +15,7 @@ public class Test : MonoBehaviour
         polygonCollider = GetComponent<PolygonCollider2D>();
         sprite = GetComponent<SpriteRenderer>().sprite;
         //color=GetComponent<SpriteRenderer>().color;
+        SAVE();
     }
 
     // Update is called once per frame

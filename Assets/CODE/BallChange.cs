@@ -37,19 +37,20 @@ public class BallChange : MonoBehaviour
             {
                 spriteRenderer=Ballls[i].GetComponent<SpriteRenderer>();
                 
-                if(InfoToSave.Balls[i]!=null)
+                if(InfoToSave.Balls[i]!="")
                     {
-                        
+                        Debug.Log("Ball"+i+1+"Check InfoSave");
                         if(GetImage(InfoToSave.Balls[i]) is Texture2D texture2D)
                         spriteRenderer.sprite=TextureToSpriteMethod(texture2D);
-                       // spriteRenderer.size = new Vector2(1,1);
+                        spriteRenderer.size = new Vector2(1,1);
                     }
                     
                 else 
                     {
+                        Debug.Log("Ball"+i+1+"Null InfoSave Load Default");
                         if(image[i] is Texture2D texture2D)
                         spriteRenderer.sprite=TextureToSpriteMethod(texture2D);
-                      //  spriteRenderer.size = new Vector2(1,1);
+                        spriteRenderer.size = new Vector2(1,1);
                                 
                     }
                 
@@ -57,7 +58,7 @@ public class BallChange : MonoBehaviour
        // ballControl.Test();
         
         SatIMAGE(InfoToSave.Balls,0);
-        if(InfoToSave.Balls[11]!=null)
+        if(InfoToSave.Balls[11]!="")
                 BackGr.texture=GetImage(InfoToSave.Balls[11]);
                 else 
                 BackGr.texture=image[11];
@@ -144,21 +145,21 @@ public class BallChange : MonoBehaviour
     }
     Texture GetImage(string path)
     {
-       return NativeGallery.LoadImageAtPath( path, 300 );
+       return NativeGallery.LoadImageAtPath( path, 100 );
     }
 
     void SatIMAGE(string[] infoSave,int A)
     {
-        if(infoSave[A]!=null)
+        if(infoSave[A]!="")
         {
-             Debug.Log("Ball:"+A+"Check");
+             Debug.Log("Ball:"+A+1+"Check");
             rawimage.texture=GetImage(infoSave[A]);
            
         }
                 
                 else 
                 {
-                    Debug.Log("Ball:"+A+"Null");
+                    Debug.Log("Ball:"+A+1+"Null");
                     rawimage.texture=image[A];
                     
                 }

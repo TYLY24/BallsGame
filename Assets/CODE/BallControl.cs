@@ -28,7 +28,7 @@ public class BallControl : MonoBehaviour
 
     
     // Update is called once per frame
-    void BallShapeOrNot(GameObject Ball)
+    public void BallShapeOrNot(GameObject Ball)
     {
         if(mainMenuControl.KeepShape)
         {

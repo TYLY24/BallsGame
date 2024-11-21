@@ -1,19 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BallChange : MonoBehaviour
 {
     public SaveInfo InfoToSave;
-    [SerializeField]Texture[] image;
+    [SerializeField]Texture2D[] image;
     [SerializeField] BallControl ballControl;
     [SerializeField] GameObject[] Ballls;
+    [SerializeField] RawImage[] BallEx;
     [SerializeField]Texture2D imageGet;
     string pathGet;
+    [SerializeField] GameObject Setting;
     [SerializeField]SavenLoad saveNLoad;
     [SerializeField] RawImage rawimage,BackGr;
     [SerializeField] TMP_Dropdown TMPdropdownBall;
@@ -36,7 +40,7 @@ public class BallChange : MonoBehaviour
         for (int i=0;i<Ballls.Length;i++)
             {
                 spriteRenderer=Ballls[i].GetComponent<SpriteRenderer>();
-                
+                SetBallExample(i);
                 if(InfoToSave.Balls[i]!="")
                     {
                         Debug.Log("Ball"+i+1+"Check InfoSave");
@@ -48,8 +52,8 @@ public class BallChange : MonoBehaviour
                 else 
                     {
                         Debug.Log("Ball"+i+1+"Null InfoSave Load Default");
-                        if(image[i] is Texture2D texture2D)
-                        spriteRenderer.sprite=TextureToSpriteMethod(texture2D);
+                        
+                        spriteRenderer.sprite= TextureToSpriteMethod(image[i]);
                         spriteRenderer.size = new Vector2(1,1);
                                 
                     }
@@ -63,6 +67,23 @@ public class BallChange : MonoBehaviour
                 else 
                 BackGr.texture=image[11];
         BGFitIn();
+    }
+
+    void SetBallExample(int A)
+    {
+        if(InfoToSave.Balls[A]!="")
+        {
+            // Debug.Log("Ball:"+A+1+"Check");
+            BallEx[A].texture=GetImage(InfoToSave.Balls[A]);
+           
+        }
+                
+                else 
+                {
+                    Debug.Log("Ball:"+A+1+"Null");
+                    BallEx[A].texture=image[A];
+                    
+                }
     }
     Sprite TextureToSpriteMethod(Texture2D texture)
     {
@@ -82,10 +103,13 @@ public class BallChange : MonoBehaviour
     {
         if( NativeGallery.IsMediaPickerBusy() )
 				return;
-        Pickimage(50);
+        pathGet=TMPdropdownBall.value.ToString();
+        Pickimage(1400);
         
         
         InfoToSave.Balls[TMPdropdownBall.value]=pathGet;
+        
+        LoadAndApplyImage(InfoToSave.Balls[TMPdropdownBall.value]);
         rawimage.texture=imageGet;
         if(TMPdropdownBall.value==11)
         BackGr.texture=imageGet;
@@ -116,7 +140,7 @@ public class BallChange : MonoBehaviour
     {
        
        saveNLoad.Save();
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 
@@ -129,23 +153,65 @@ public class BallChange : MonoBehaviour
             if( path != null )
             {
              //   pathGet=path;
-             pathGet= path;
+             //pathGet= path;
                // Debug.Log("Path saved: " + pathGet);
                 // Create Texture from selected image
-                imageGet = NativeGallery.LoadImageAtPath( path, maxSize );
+              //  imageGet = NativeGallery.LoadImageAtPath( path, maxSize );
                 
-                if( imageGet == null )
-                {
-                    Debug.Log( "Couldn't load texture from " + path );
-                    return;
-                }
+                // if( imageGet == null )
+                // {
+                //     Debug.Log( "Couldn't load texture from " + path );
+                //     return;
+                // }
+                string destinationPath = Path.Combine(Application.persistentDataPath, pathGet);
+                File.Copy(path, destinationPath, true);
+                Debug.Log($"Image copied to: {destinationPath}");
             }
         });
         Debug.Log( "Permission result: " + permission );
     }
+    void LoadAndApplyImage(string Paths)
+    {
+        // Path to the copied image in persistentDataPath
+        string imagePath = Path.Combine(Application.persistentDataPath, Paths);
+
+        // Check if the file exists
+        if (File.Exists(imagePath))
+        {
+            // Load the image as a byte array
+            byte[] imageData = File.ReadAllBytes(imagePath);
+
+            // Create a texture from the byte array
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(imageData);
+
+            // Apply the texture to the target material (or UI Image)
+            imageGet = texture;
+            Debug.Log($"Image loaded and applied from: {imagePath}");
+        }
+        else
+        {
+            Debug.LogError("Image file not found.");
+        }
+    }
     Texture GetImage(string path)
     {
-       return NativeGallery.LoadImageAtPath( path, 100 );
+        string imagePath = Path.Combine(Application.persistentDataPath, path);
+         if (File.Exists(imagePath))
+        {
+            // Load the image as a byte array
+            byte[] imageData = File.ReadAllBytes(imagePath);
+
+            // Create a texture from the byte array
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(imageData);
+
+            // Apply the texture to the target material (or UI Image)
+            return texture;
+           // Debug.Log($"Image loaded and applied from: {imagePath}");
+        }else
+        return null;
+       
     }
 
     void SatIMAGE(string[] infoSave,int A)

@@ -8,6 +8,7 @@ public class AudioControl : MonoBehaviour
     public AudioSource Music;
     public AudioSource Sfx;
     public AudioClip BgmMusic;
+    public AudioClip bubblePop;
     void Start()
     {
         Music.clip=BgmMusic;
@@ -15,8 +16,8 @@ public class AudioControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Playsfx(AudioClip sfx)
     {
-        
+        Sfx.PlayOneShot(sfx);
     }
 }

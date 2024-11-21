@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - Droper
+  - Undefined
+  - 11
+  - DeadZone
   layers:
   - Default
   - TransparentFX
@@ -12,7 +26,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Balls
   - 
   - 
   - 
@@ -40,6 +54,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GamePlay
+    uniqueID: 3445964113
     locked: 0
   - name: Balls
     uniqueID: 538848431

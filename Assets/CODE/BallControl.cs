@@ -75,6 +75,17 @@ public class BallControl : MonoBehaviour
 
     void Update()
     {
+      if(Gameover)
+        {
+         GameOverUi.SetActive(true);
+         textPoint.text=Points.ToString();
+         Gameover=false;
+
+        }
+        else
+        {
+
+        
        if(NewBall)
        {
          audioControl.Playsfx(audioControl.bubblePop);
@@ -103,7 +114,7 @@ public class BallControl : MonoBehaviour
             i=2;
             else 
             i=1;
-            Spawner(SpawnPoint,10,true);
+            Spawner(SpawnPoint,i,true);
             HaveBall=true;
             // Output the world position to the console
            // Debug.Log("Mouse clicked at world position: " + mouseWorldPosition);
@@ -114,12 +125,6 @@ public class BallControl : MonoBehaviour
       //    wincon++;
       //   }
         
-        if(Gameover)
-        {
-         GameOverUi.SetActive(true);
-         textPoint.text=Points.ToString();
-         Gameover=false;
-
         }
     }
     

@@ -42,7 +42,7 @@ public class SavenLoad : MonoBehaviour
         {
              BinaryFormatter formatter=new BinaryFormatter();
             ballChange.InfoToSave=(SaveInfo)formatter.Deserialize(file);
-            Debug.LogError("Load Success!!!");
+          //  Debug.LogError("Load Success!!!");
         }
         catch(SerializationException e)
         {

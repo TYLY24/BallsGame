@@ -22,10 +22,11 @@ public class MainMenuControl : MonoBehaviour
     {
         Application.targetFrameRate=60;
         
-        if(PlayerPrefs.HasKey("VfxcVol"))
+        if(PlayerPrefs.HasKey("VfxcVol")||PlayerPrefs.HasKey("musicVol"))
         {
+          
             LoadVolume();
-            loadToggler();
+           
 
         }
         else
@@ -54,34 +55,18 @@ public class MainMenuControl : MonoBehaviour
     }
     ///SETTTIINGGGGG
     
-    
-    // public void KeepTheShape(bool A)
+
+    // void loadToggler()
     // {
-    //     if(A)
-    //     {
-    //         rawImageMask.enabled=true;
-    //         PlayerPrefs.SetInt("KeepShape",1);
-    //     }
-        
-    //     else
-    //     {
-    //         rawImageMask.enabled=false;
-    //        PlayerPrefs.SetInt("KeepShape",0);
-    //     }
-    //     KeepShape=A;
-    //      ballControl.Test();
+    //     Debug.Log("KeepShape"+PlayerPrefs.GetInt("KeepShape"));
+    //     bool A;
+    //         if(PlayerPrefs.GetInt("KeepShape")==1)
+    //         A=true;
+    //         else
+    //         A=false;
+    //         toggleKeepShape.isOn = A;
+    //         //KeepTheShape(A);
     // }
-    void loadToggler()
-    {
-        Debug.Log("KeepShape"+PlayerPrefs.GetInt("KeepShape"));
-        bool A;
-            if(PlayerPrefs.GetInt("KeepShape")==1)
-            A=true;
-            else
-            A=false;
-            toggleKeepShape.isOn = A;
-            //KeepTheShape(A);
-    }
     public void CLear()
     {
         savenLoad.ClearData();
@@ -99,12 +84,15 @@ public class MainMenuControl : MonoBehaviour
         Mymixer.SetFloat("MusicVolume",Mathf.Log10(Vol)*20);
         PlayerPrefs.SetFloat("musicVol",Vol);
         musicSlider2.value=Vol;
+       //\\ Debug.Log("Volume Seted ="+ Mathf.Log10(Vol)*20);
       //  LoadVolume();
     }
     public void VolumeMusic2()
     {
         float Vol=musicSlider2.value;
+        
         Mymixer.SetFloat("MusicVolume",Mathf.Log10(Vol)*20);
+        
         PlayerPrefs.SetFloat("musicVol",Vol);
       //  LoadVolume();
       musicSlider.value=Vol;
@@ -129,8 +117,8 @@ public class MainMenuControl : MonoBehaviour
     {
         SfxSlider2.value=SfxSlider.value=PlayerPrefs.GetFloat("VfxcVol");
         musicSlider2.value=musicSlider.value=PlayerPrefs.GetFloat("musicVol");
-        VolumeMusic();
-        SfxVolume();
+        VolumeMusic2();
+        SfxVolume2();
         
     }
     public void Leader()

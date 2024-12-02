@@ -21,18 +21,10 @@ public class BallChange : MonoBehaviour
     [SerializeField]SavenLoad saveNLoad;
     [SerializeField] RawImage rawimage,BackGr;
     [SerializeField] TMP_Dropdown TMPdropdownBall;
-    [SerializeField] int BgWidth ;
-    [SerializeField] int BgHeight;
+
     
     SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
-    // void Awake()
-    // {
-    //     #if !UNITY_EDITOR && UNITY_ANDROID
-    //         using( AndroidJavaClass ajc = new AndroidJavaClass( "com.yasirkula.unity.NativeGalleryMediaPickerFragment" ) )
-    //         ajc.SetStatic<bool>( "GrantPersistableUriPermission", true );
-    //     #endif
-    // }
+
     void Start()
 
     {
@@ -43,7 +35,7 @@ public class BallChange : MonoBehaviour
                 SetBallExample(i);
                 if(InfoToSave.Balls[i]!="")
                     {
-                        Debug.Log("Ball"+i+1+"Check InfoSave");
+                     //   Debug.Log("Ball"+i+1+"Check InfoSave");
                         if(GetImage(InfoToSave.Balls[i]) is Texture2D texture2D)
                         spriteRenderer.sprite=TextureToSpriteMethod(texture2D);
                         spriteRenderer.size = new Vector2(1,1);
@@ -123,8 +115,7 @@ public class BallChange : MonoBehaviour
         float screenAspect = (float)Screen.width / Screen.height;
         float textureAspect = (float)BackGr.texture.width / BackGr.texture.height;
 
-        // Calculate UV Rect to preserve aspect ratio without stretching
-        if (screenAspect > textureAspect) // Screen is wider
+        if (screenAspect > textureAspect) // Screen is to hon
         {
             float heightScale = textureAspect / screenAspect;
             BackGr.uvRect = new Rect(0, (1 - heightScale) / 2, 1, heightScale);
@@ -148,46 +139,36 @@ public class BallChange : MonoBehaviour
     {
         NativeGallery.Permission permission = NativeGallery.GetImageFromGallery( ( path ) =>
         {
-          //  Debug.Log( "Image path: " + path );
+    ;
             
             if( path != null )
             {
-             //   pathGet=path;
-             //pathGet= path;
-               // Debug.Log("Path saved: " + pathGet);
-                // Create Texture from selected image
-              //  imageGet = NativeGallery.LoadImageAtPath( path, maxSize );
-                
-                // if( imageGet == null )
-                // {
-                //     Debug.Log( "Couldn't load texture from " + path );
-                //     return;
-                // }
+             
                 string destinationPath = Path.Combine(Application.persistentDataPath, pathGet);
                 File.Copy(path, destinationPath, true);
                 Debug.Log($"Image copied to: {destinationPath}");
             }
         });
-        Debug.Log( "Permission result: " + permission );
+
     }
     void LoadAndApplyImage(string Paths)
     {
-        // Path to the copied image in persistentDataPath
+ 
         string imagePath = Path.Combine(Application.persistentDataPath, Paths);
 
-        // Check if the file exists
+ 
         if (File.Exists(imagePath))
         {
-            // Load the image as a byte array
+
             byte[] imageData = File.ReadAllBytes(imagePath);
 
-            // Create a texture from the byte array
+    
             Texture2D texture = new Texture2D(2, 2);
             texture.LoadImage(imageData);
 
-            // Apply the texture to the target material (or UI Image)
+
             imageGet = texture;
-            Debug.Log($"Image loaded and applied from: {imagePath}");
+
         }
         else
         {
@@ -208,7 +189,7 @@ public class BallChange : MonoBehaviour
 
             // Apply the texture to the target material (or UI Image)
             return texture;
-           // Debug.Log($"Image loaded and applied from: {imagePath}");
+      
         }else
         return null;
        

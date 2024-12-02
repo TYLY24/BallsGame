@@ -214,6 +214,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallNumber: 11
-  BallBig: {fileID: 0}
-  Lauch: 0
   ballControl: {fileID: 0}
